@@ -21,7 +21,7 @@ let playerWins = 0;
 
 function game(result) {
     const results = document.querySelector('#results');
-
+    
     if (result == 1) {
         playerWins++;
         document.getElementById('winner').innerText = "Player Won!";
