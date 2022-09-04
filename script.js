@@ -1,27 +1,39 @@
+let outcome
 
-function game() {
-    let computerWins = 0;
-    let playerWins = 0;
-    let result = 0;
-    for (let i = 0; i < 5; i++) {
-        result = playRound(playerSelection(), getComputerChoice())
-        if (result == 1) {
-            playerWins++;
-            console.log("Player Won!")
-        }
-        else if (result == 2) {
-            computerWins++;
-            console.log("Computer Won!")
-        }
-        console.log("The Score is " + playerWins + ":" + computerWins);
+//gets the result based on the button clicked, and then calls game()
+const rock = document.querySelector('#Rock');
+rock.addEventListener('click', () => {
+    game(playRound("Rock", getComputerChoice()));
+});
+
+const paper = document.querySelector('#Paper');
+paper.addEventListener('click', () => {
+    game(playRound("Paper", getComputerChoice()));
+});
+
+const scissors = document.querySelector('#Scissors');
+scissors.addEventListener('click', () => {
+    game(playRound("Scissors", getComputerChoice()));
+});
+
+let computerWins = 0;
+let playerWins = 0;
+
+function game(result) {
+    const results = document.querySelector('#results');
+
+    if (result == 1) {
+        playerWins++;
+        document.getElementById('winner').innerText = "Player Won!";
     }
-    if (playerWins>computerWins)
-        console.log("You win!")
-    else if (playerWins<computerWins)
-        console.log("Computer won!")
-    else 
-        console.log("It's a Tie!")
-
+    else if (result == 2) {
+        computerWins++;
+        document.getElementById('winner').innerText = "Computer Won!";
+    }
+    else if (result ==0) {
+        document.getElementById('winner').innerText = "It's a Tie!";
+    }
+    document.getElementById('score').innerText = "The Score is " + playerWins + ":" + computerWins
 }
 
 function playRound(playerSelection, computerSelection) {
@@ -58,7 +70,6 @@ function playRound(playerSelection, computerSelection) {
     return result;
 }
 
-game();
 
 function getComputerChoice() {
     //Declaration
